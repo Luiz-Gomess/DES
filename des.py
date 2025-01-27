@@ -10,15 +10,43 @@ INITIAL_PERMUTATION_TABLE = [
     63,	55,	47,	39,	31,	23,	15,	7,
 ]
 
+SHIFTS = [
+    1,1,2,2,
+    2,2,2,2,
+    1,2,2,2,
+    2,2,2,1
+]
 
+#Tabela de permutação de compreensão
+COMP_PERMUTATION_TABLE = [
+    14, 17, 11, 24, 1, 5,
+    3, 28, 15, 6, 21, 10,
+    23, 19, 12, 4, 26, 8,
+    16, 7, 27, 20, 13, 2,
+    41, 52, 31, 37, 47, 55,
+    30, 40, 51, 45, 33, 48,
+    44, 49, 39, 56, 34, 53,
+    46, 42, 50, 36, 29, 32
+]
+
+#Permutação Inicial
 def block_permutation(block):
+    """Permutação Inicial
+
+        Reposiciona os bits com base nos valores da tabela.
+    Args:
+        block (str): bloco de bits
+
+    Returns:
+        str: bloco de bits reposicionados
+    """
     permuted_block = ''
     for position in INITIAL_PERMUTATION_TABLE:
         permuted_block += block[position-1]
     
     return permuted_block
 
-
+#Separa o resultado da permutação inicial em duas variaveis de 32 bits cada.
 def spliting_halves(permuted_block):
     left = ''
     right = ''
@@ -31,8 +59,18 @@ def spliting_halves(permuted_block):
     
     return left, right
 
-
+#Gerador da chave original
 def key_generation(key):
+    """Gera uma chave original de 56 bits.
+    A chave bruta é recebida com o tamanho de 64 bits e reduzida para 56 bits,
+    descartando seus bits múltiplos de 8. 
+
+    Args:
+        key (str): chave bruta de 64 bits. 
+
+    Returns:
+        str: chave de 56 bits
+    """
     key_56bits = ''
 
     for position, bit in enumerate(key):
@@ -42,6 +80,47 @@ def key_generation(key):
             key_56bits += bit
     
     return key_56bits
+
+#Rotações a esquerda
+def shifts_left(half_key, shifts):
+    """Rotaciona os bits a esquerda conforme o numero de
+      saltos recebido.
+
+    Args:
+        half_key (str): Metade da chave de 56 bits.
+        shifts (int): Numero de saltos a esquerda. 
+
+    Returns:
+        str: Parte da chave rotacionada a esquerda
+    """
+    rotated_key = ''
+    for _ in range(shifts):
+        for i in range(1, len(half_key)):
+            rotated_key += half_key[i]
+        rotated_key += half_key[0]
+        half_key = rotated_key
+        rotated_key = ''
+
+    return half_key
+
+#Gerador de sub-chaves
+def compression_permutation(string56bit):
+    """
+    Gera uma sub-chave de 48 bits proveniente da 
+    chave original de 56 bits.
+
+    Args:
+        string56bit (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    comp_permutation = ''
+
+    for i in range(0, 48):
+        comp_permutation += string56bit[COMP_PERMUTATION_TABLE[i]-1]
+
+    return comp_permutation
 
 
 if __name__ == "__main__":
@@ -55,7 +134,7 @@ if __name__ == "__main__":
     permuted_block = block_permutation(block)
     left, right = spliting_halves(permuted_block)
 
-    generated_key = key_generation(bin_key)
+    generated_56bit_key = key_generation(bin_key)
 
 
     # print(left)
@@ -63,9 +142,15 @@ if __name__ == "__main__":
 
     # print(permuted_block == left + right)
     print(block)
-    print(len(generated_key))
+    print(len(generated_56bit_key))
 
+    len(left)
 
+    left
+    shifts_left(left, 1)
+    
+
+    right
 
 
 
