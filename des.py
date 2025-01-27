@@ -1,5 +1,3 @@
-
-
 INITIAL_PERMUTATION_TABLE = [
 
     58,	50,	42,	34,	26,	18,	10,	2,
@@ -11,11 +9,6 @@ INITIAL_PERMUTATION_TABLE = [
     61,	53,	45,	37,	29,	21,	13,	5,
     63,	55,	47,	39,	31,	23,	15,	7,
 ]
-
-
-entry = "ifpbifpb"
-block = ''.join(format(ord(i), '08b') for i in entry)
-
 
 
 def block_permutation(block):
@@ -43,7 +36,7 @@ def key_generation(key):
     key_56bits = ''
 
     for position, bit in enumerate(key):
-        if position % 8 == 0:
+        if position in [x for x in range(7,64,8)]:
             pass
         else:
             key_56bits += bit
@@ -69,7 +62,7 @@ if __name__ == "__main__":
     # print(right)
 
     # print(permuted_block == left + right)
- 
+    print(block)
     print(len(generated_key))
 
 
