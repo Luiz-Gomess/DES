@@ -25,6 +25,7 @@ def block_permutation(block):
     
     return permuted_block
 
+
 def spliting_halves(permuted_block):
     left = ''
     right = ''
@@ -38,19 +39,38 @@ def spliting_halves(permuted_block):
     return left, right
 
 
+def key_generation(key):
+    key_56bits = ''
+
+    for position, bit in enumerate(key):
+        if position % 8 == 0:
+            pass
+        else:
+            key_56bits += bit
+    
+    return key_56bits
+
+
 if __name__ == "__main__":
 
     entry = "ifpbifpb"
     block = ''.join(format(ord(i), '08b') for i in entry)
 
+    key = 'ifpbifpb'
+    bin_key = ''.join(format(ord(i), '08b') for i in key)
+
     permuted_block = block_permutation(block)
     left, right = spliting_halves(permuted_block)
 
-    print(left)
-    print(right)
+    generated_key = key_generation(bin_key)
 
-    print(permuted_block == left + right)
+
+    # print(left)
+    # print(right)
+
+    # print(permuted_block == left + right)
  
+    print(len(generated_key))
 
 
 
