@@ -14,16 +14,40 @@ class DES:
         pass
 
     #Funções auxiliares
-    def __permute(self, bits, table):
-        """ Aplica permutação usando uma tabela """
+    def __permute(self, bits:list[int], table:list[int]) -> list[int]:
+        """Aplica permutação usando uma tabela fornecida.
+
+        Args:
+            bits (list[int]): bits a serem permutados.
+            table (list[int]): tabela a ser utilizada.
+
+        Returns:
+            list[int]: lista de bits permutados.
+        """
         return [bits[i-1] for i in table]
 
-    def __left_shift(self, bits, n):
-        """ Deslocamento circular para esquerda """
+    def __left_shift(self, bits: list[int], n: int) -> list[int]:
+        """Realiza o deslocamento circular para a esquerda.
+
+        Args:
+            bits (list[int]): Bits a serem deslocados.
+            n (int): numero de deslocamentos.
+
+        Returns:
+            list[int]: bits rotacionados
+        """
         return bits[n:] + bits[:n]
 
-    def __xor(self, bits1, bits2):
-        """ XOR entre duas listas de bits """
+    def __xor(self, bits1: list[int], bits2: list[int]) -> list[int]:
+        """Realiza o XOR entre duas listas de bits
+
+        Args:
+            bits1 (list[int]): conjunto de bits 1
+            bits2 (list[int]): conjunto de bits 2
+
+        Returns:
+            list[int]: bits processados
+        """
         return [b1 ^ b2 for b1, b2 in zip(bits1, bits2)]
     
     def __adjust_key(self, key):
@@ -214,6 +238,6 @@ if __name__ == "__main__":
     plaintext = "THIS IS A LITTLE TEXT TO CIPHER"
 
     des = DES()
-    des.main(key=chave, plaintext= plaintext)
+    des.main(key=chave, plaintext=plaintext)
 
 
