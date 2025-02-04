@@ -48,7 +48,7 @@ try:
     # Aguarda a mensagem cifrada
     print("Aguardando mensagem cifrada...")
     ciphertext = sock.recvfrom(1024)[0]
-    print(f"Mensagem cifrada recebida: {ciphertext}")
+    print(f"Mensagem cifrada recebida: {ciphertext.hex()}")
 
     # Descriptografa a mensagem
     plaintext = des.decrypt(ciphertext, str(shared_secret))

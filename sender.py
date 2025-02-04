@@ -56,7 +56,7 @@ try:
 
     # Cifra a mensagem
     ciphertext = des.encrypt(plaintext, str(shared_secret))
-    print(f"Mensagem cifrada: {ciphertext}")
+    print(f"Mensagem cifrada: {ciphertext.hex()}")
 
     # Envia a mensagem cifrada
     conn.sendall(ciphertext)
