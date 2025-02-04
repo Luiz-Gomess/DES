@@ -1,6 +1,10 @@
 from tabelas import PERMUTACAO_INICIAL, PERMUTACAO_FINAL, PERMUTACAO, PC1, PC2, S_BOXES, SHIFTS, EXPANSAO_T
 
 class DES:
+
+    """
+    Implementação do algorítmo Data Encryption Standard.
+    """
     PI = PERMUTACAO_INICIAL
     PF = PERMUTACAO_FINAL
     P = PERMUTACAO
@@ -235,7 +239,7 @@ class DES:
 if __name__ == "__main__":
     
     chave = "5"
-    plaintext = "THIS IS A LITTLE TEXT TO CIPHER"
+    plaintext = "THIS IS A VERY LARGE TEXT TO CIPHER WITH DATA ENCRYPTION ALGORITHM "
 
     des = DES()
     des.main(key=chave, plaintext=plaintext)
