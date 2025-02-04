@@ -31,6 +31,13 @@ class Diffie_Hellman:
         """
         return self.public_key
     
+    def get_private_key(self) -> int:
+        """Retorna a chave privada.
+        
+        Returns: int: chave privada.
+        """
+        return self.private_key
+    
     def calculate_shared_secret(self, received_public_key: int):
         """Calcula o segredo compartilhada, utilizando a chave pública recebida.
         
